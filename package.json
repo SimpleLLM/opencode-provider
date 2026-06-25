@@ -1,0 +1,44 @@
+{
+  "name": "@simplellm/opencode-provider",
+  "version": "0.5.1",
+  "description": "SimpleLLM provider setup for OpenCode — one command, EU-hosted LLM inference",
+  "type": "module",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "bin": {
+    "@simplellm/opencode-provider": "dist/cli.js",
+    "simplellm-opencode": "dist/cli.js"
+  },
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "dist/"
+  ],
+  "keywords": [
+    "opencode",
+    "opencode-plugin",
+    "simplellm",
+    "ai-sdk",
+    "llm"
+  ],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SimpleLLM/opencode-provider.git"
+  },
+  "homepage": "https://github.com/SimpleLLM/opencode-provider#readme",
+  "bugs": "https://github.com/SimpleLLM/opencode-provider/issues",
+  "scripts": {
+    "build": "tsc",
+    "prepublishOnly": "npm run build"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "typescript": "^5.9.3"
+  }
+}
