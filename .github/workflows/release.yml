@@ -1,27 +1,25 @@
 name: Release
 
-# Publishes to npm when a version tag is pushed, e.g.:
-#   npm version patch && git push --follow-tags
-# Requires the NPM_TOKEN repository/org secret (npm automation token).
-
+# npm trusted publisher: SimpleLLM/opencode-provider, release.yml, no environment.
 on:
   push:
     tags: ['v*']
+  workflow_dispatch:
 
 jobs:
   publish:
     runs-on: ubuntu-latest
     permissions:
       contents: read
+      id-token: write
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
         with:
-          node-version: 20
-          cache: npm
+          node-version: '24'
           registry-url: https://registry.npmjs.org
+          package-manager-cache: false
+      - run: npm install --global npm@latest
       - run: npm ci
       - run: npm test
       - run: npm publish --access public
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
