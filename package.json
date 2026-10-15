@@ -6,8 +6,8 @@
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "bin": {
-    "@simplellm/opencode-provider": "dist/cli.js",
-    "simplellm-opencode": "dist/cli.js"
+    "simplellm-opencode": "dist/cli.js",
+    "opencode-provider": "dist/cli.js"
   },
   "exports": {
     ".": {

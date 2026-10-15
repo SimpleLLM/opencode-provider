@@ -24,7 +24,7 @@ The setup wizard:
 Then start OpenCode with a SimpleLLM model:
 
 ```bash
-opencode --model simplellm/Qwen3-Coder-30B-A3B-Instruct
+opencode --model simplellm/glm-5.3-flash
 ```
 
 Re-run the command any time models or your URL change — it **merges** into your existing OpenCode config without overwriting other providers.

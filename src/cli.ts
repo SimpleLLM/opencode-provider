@@ -97,9 +97,9 @@ async function main() {
 
   // 5. Write opencode config
   const existingConfig = await readJSON(OPENCODE_CONFIG)
-  const defaultModelId = available.find((m) => m.id === 'Qwen3-Coder-30B-A3B-Instruct')?.id
+  const defaultModelId = available.find((m) => m.id === 'glm-5.3-flash')?.id
     ?? available[0]?.id
-    ?? 'Qwen3-Coder-30B-A3B-Instruct'
+    ?? 'glm-5.3-flash'
 
   const newConfig = {
     ...existingConfig,
@@ -128,8 +128,8 @@ async function main() {
   console.log()
   console.log('  Done! Start OpenCode:')
   console.log()
-  const defaultModel = available.find((m) => m.id === 'Qwen3-Coder-30B-A3B-Instruct') ?? available[0]
-  console.log(`    opencode --model simplellm/${defaultModel?.id ?? 'Qwen3-Coder-30B-A3B-Instruct'}`)
+  const defaultModel = available.find((m) => m.id === 'glm-5.3-flash') ?? available[0]
+  console.log(`    opencode --model simplellm/${defaultModel?.id ?? 'glm-5.3-flash'}`)
   console.log()
 
   rl.close()
