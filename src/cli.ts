@@ -4,6 +4,7 @@ import { readFile, writeFile, mkdir } from 'node:fs/promises'
 import { homedir } from 'node:os'
 import { join, dirname } from 'node:path'
 import type { SimpleLLMModelInfo } from './types'
+import { buildOpenCodeModels } from './models.js'
 
 const rl = createInterface({ input: process.stdin, output: process.stdout })
 const ask = (q: string): Promise<string> =>
@@ -92,17 +93,7 @@ async function main() {
   console.log()
 
   // 4. Build model config (skip planned)
-  const modelConfig: Record<string, any> = {}
-  for (const m of available) {
-    const ctx = m.context_length ?? 32768
-    modelConfig[m.id] = {
-      name: m.display_name ?? m.id,
-      limit: {
-        context: ctx,
-        output: Math.floor(ctx / 2),
-      },
-    }
-  }
+  const modelConfig = buildOpenCodeModels(available)
 
   // 5. Write opencode config
   const existingConfig = await readJSON(OPENCODE_CONFIG)

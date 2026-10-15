@@ -1,6 +1,6 @@
 {
   "name": "@simplellm/opencode-provider",
-  "version": "0.5.1",
+  "version": "0.5.2",
   "description": "SimpleLLM provider setup for OpenCode — one command, EU-hosted LLM inference",
   "type": "module",
   "main": "dist/index.js",
@@ -35,7 +35,8 @@
   "bugs": "https://github.com/SimpleLLM/opencode-provider/issues",
   "scripts": {
     "build": "tsc",
-    "prepublishOnly": "npm run build"
+    "prepublishOnly": "npm run build",
+    "test": "npm run build && node --test test/*.test.mjs"
   },
   "devDependencies": {
     "@types/node": "^22.0.0",

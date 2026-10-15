@@ -1,3 +1,4 @@
+import { modelLimits } from './limits.js'
 import type { SimpleLLMModelInfo, ModelConfig } from './types'
 
 /**
@@ -22,11 +23,11 @@ export async function discoverModels(
   for (const m of models) {
     if (!m.enabled) continue
 
-    const contextLength = m.context_length ?? 32768
+    const limit = modelLimits(m.context_length)
     config[m.id] = {
       name: m.id,
-      contextLength,
-      maxOutputTokens: Math.floor(contextLength / 2),
+      contextLength: limit.context,
+      maxOutputTokens: limit.output,
       displayName: m.display_name ?? undefined,
       isFree: m.is_free,
       priceSCInput: m.price_sc_input,
@@ -35,4 +36,14 @@ export async function discoverModels(
   }
 
   return config
+}
+
+/** Complete OpenCode model entries; keep context and output together. */
+export function buildOpenCodeModels(models: SimpleLLMModelInfo[]) {
+  return Object.fromEntries(models
+    .filter(model => model.enabled && model.status !== 'planned')
+    .map(model => [model.id, {
+      name: model.display_name ?? model.id,
+      limit: modelLimits(model.context_length),
+    }]))
 }
